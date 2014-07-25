@@ -19,6 +19,8 @@
 @property (nonatomic, assign) UIEdgeInsets foregroundScreenEdgeInsets;
 
 @property (nonatomic, assign) NSInteger maxAllowableItem;
+@property (nonatomic, assign) BOOL bounces;
+@property (nonatomic, assign) BOOL showsHorizontalScrollIndicator;
 
 - (void)prevItem;
 - (void)nextItem;

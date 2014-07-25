@@ -62,6 +62,26 @@ static const NSInteger PWInvalidPosition = -1;
     [_foregroundScrollView setFrame:UIEdgeInsetsInsetRect(self.bounds, _foregroundScreenEdgeInsets)];
 }
 
+- (BOOL)bounces
+{
+    return _touchScrollView.bounces;
+}
+
+- (void)setBounces:(BOOL)bounces
+{
+    _touchScrollView.bounces = bounces;
+}
+
+- (BOOL)showsHorizontalScrollIndicator
+{
+    return _touchScrollView.showsHorizontalScrollIndicator;
+}
+
+- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator
+{
+    _touchScrollView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
+}
+
 - (void)initControl
 {
     self.backgroundColor = [UIColor blackColor];
@@ -83,12 +103,14 @@ static const NSInteger PWInvalidPosition = -1;
     _foregroundScrollView.clipsToBounds = NO;
     _foregroundScrollView.backgroundColor = [UIColor clearColor];
     _foregroundScrollView.contentOffset = CGPointMake(0, 0);
-    
+    _foregroundScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+
     self.backgroundScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     _backgroundScrollView.pagingEnabled = YES;
     _backgroundScrollView.backgroundColor = [UIColor clearColor];
     _backgroundScrollView.contentOffset = CGPointMake(0, 0);
-    
+    _backgroundScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+   
     [self addSubview:_backgroundScrollView];
     [self addSubview:_foregroundScrollView];
     [self addSubview:_touchScrollView];
@@ -187,6 +209,7 @@ static const NSInteger PWInvalidPosition = -1;
 - (void)loadForegroundViewAtIndex:(NSInteger)index
 {
     UIView *newParallaxView = [self foregroundViewAtIndex:index];
+   newParallaxView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
     [_foregroundScrollView addSubview:newParallaxView];
 }
